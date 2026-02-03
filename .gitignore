@@ -1,0 +1,35 @@
+# Ignorar dependencias y entornos
+vendor/
+node_modules/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+
+# IDEs y editores
+.vscode/
+.idea/
+
+# Archivos de sistema y logs
+*.log
+logs/
+
+# Composer
+/composer.lock
+
+# Subidas temporales
+/uploads/
+
+# XAMPP specific
+*.sql
+
+# PHPStorm metadata
+.idea/
+
+# Build / cache
+cache/
+tmp/
+
+# Otros
+*.zip
+*.tar.gz
