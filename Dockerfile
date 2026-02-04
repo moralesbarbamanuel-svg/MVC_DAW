@@ -1,17 +1,11 @@
-FROM php:8.1-apache
+FROM php:8.1-cli
 
-# Instalar extensiones
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Habilitar mod_rewrite
-RUN a2enmod rewrite
+COPY . /app/
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+WORKDIR /app/
 
-COPY . /var/www/html/
+EXPOSE 8000
 
-RUN chown -R www-data:www-data /var/www/html
-
-WORKDIR /var/www/html/
-
-EXPOSE 80
+CMD ["php", "-S", "0.0.0.0:8000"]
