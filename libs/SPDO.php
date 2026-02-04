@@ -16,7 +16,7 @@ class SPDO
 
         $host = defined('DB_HOST') ? DB_HOST : 'metro.proxy.rlwy.net:54578/railway';
         $user = defined('DB_USER') ? DB_USER : 'root';
-        $pass = defined('DB_PASS') ? DB_PASS : '';
+        $pass = defined('DB_PASS') ? DB_PASS : 'iCqVrubLjyyoKCvHlaSJqSdingwTPLlS';
         $db = defined('DB_NAME') ? DB_NAME : 'railway';
 
         $this->mysqli = new mysqli($host, $user, $pass, $db);
