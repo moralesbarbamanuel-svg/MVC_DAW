@@ -65,7 +65,6 @@ class SPDO
         }
         return self::$instance;
     }
-
     // Prepara una consulta y devuelve un objeto SPDOStatement
     public function prepare($sql)
     {
