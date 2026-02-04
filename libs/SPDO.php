@@ -14,12 +14,40 @@ class SPDO
             }
         }
 
-        $host = defined('DB_HOST') ? DB_HOST : '127.0.0.1';
+        $hostRaw = defined('DB_HOST') ? DB_HOST : '127.0.0.1';
         $user = defined('DB_USER') ? DB_USER : 'root';
         $pass = defined('DB_PASS') ? DB_PASS : '';
         $db = defined('DB_NAME') ? DB_NAME : '';
+        $port = defined('DB_PORT') && DB_PORT ? (int) DB_PORT : null;
 
-        $this->mysqli = new mysqli($host, $user, $pass, $db);
+        // Soporta formatos en DB_HOST: 'host', 'host:port' o 'host:port/dbname'
+        if (strpos($hostRaw, '/') !== false) {
+            $parts = explode('/', $hostRaw, 2);
+            $hostPart = $parts[0];
+            if (empty($db) && isset($parts[1])) {
+                $db = $parts[1];
+            }
+        } else {
+            $hostPart = $hostRaw;
+        }
+
+        // Extraer puerto si viene en host:port y no se definió DB_PORT
+        if ($port === null && strpos($hostPart, ':') !== false) {
+            list($hostOnly, $maybePort) = explode(':', $hostPart, 2);
+            $host = $hostOnly;
+            if (is_numeric($maybePort)) {
+                $port = (int) $maybePort;
+            }
+        } else {
+            $host = $hostPart;
+        }
+
+        // Conectar usando puerto si está disponible
+        if ($port !== null && $port !== '') {
+            $this->mysqli = new mysqli($host, $user, $pass, $db, $port);
+        } else {
+            $this->mysqli = new mysqli($host, $user, $pass, $db);
+        }
         if ($this->mysqli->connect_errno) {
             die('Error de conexión a la base de datos: ' . $this->mysqli->connect_error);
         }
