@@ -4,7 +4,6 @@
 class ItemAutoController {
     // Atributo con el motor de plantillas del microframework
     protected $view;
-
     // Constructor. Únicamente instancia un objeto View y lo asigna al atributo
     function __construct() {
         //Creamos una instancia de nuestro mini motor de plantillas
