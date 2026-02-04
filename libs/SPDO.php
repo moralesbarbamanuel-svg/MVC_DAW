@@ -14,10 +14,10 @@ class SPDO
             }
         }
 
-        $host = defined('DB_HOST') ? DB_HOST : 'metro.proxy.rlwy.net:54578/railway';
+        $host = defined('DB_HOST') ? DB_HOST : '127.0.0.1';
         $user = defined('DB_USER') ? DB_USER : 'root';
-        $pass = defined('DB_PASS') ? DB_PASS : 'iCqVrubLjyyoKCvHlaSJqSdingwTPLlS';
-        $db = defined('DB_NAME') ? DB_NAME : 'railway';
+        $pass = defined('DB_PASS') ? DB_PASS : '';
+        $db = defined('DB_NAME') ? DB_NAME : '';
 
         $this->mysqli = new mysqli($host, $user, $pass, $db);
         if ($this->mysqli->connect_errno) {
